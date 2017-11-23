@@ -7,9 +7,8 @@ include_once('./library/twitteroauth-0.5.3/autoload.php');
 /**
 	ISS Crawler Lib
 **/
-include_once('./keyword.php');
 use Abraham\TwitterOAuth\TwitterOAuth; // Connect to twitter
-class Crawler extends Keyword {
+class Crawler {
 	// twitter auth
 	private $connection;
 	private $content;
@@ -31,7 +30,6 @@ class Crawler extends Keyword {
 
 	public function __construct(){
 	    set_time_limit(0);
-		parent::__construct();
 		// set construct
 		$this->twitterAuth();
 		try {
@@ -39,7 +37,8 @@ class Crawler extends Keyword {
 			array(
 				// from:e100ss @e100ss&src=typd
 				"q" => "%23setnov",
-				"src" => "recent"
+				"src" => "recent",
+				"count" => 10
 			)
 		);
 		$encoded_raw_message = json_decode(json_encode($this->statuses),true);
